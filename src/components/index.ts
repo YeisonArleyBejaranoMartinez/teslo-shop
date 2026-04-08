@@ -9,3 +9,5 @@ export * from "./product/quantity-selector/QuantitySelector";
 export * from "./product/slide-show/ProductSlideShow";
 export * from "./product/slide-show/ProductMovileSlideShow";
 export * from "./ui/footer/Footer";
+export * from "./ui/pagination/Pagination";
+export * from  "./provider/Provider";

@@ -1,10 +1,40 @@
-import { Product } from "@/src/interfaces/product.interface";
+// import { Product } from "../interfaces/product.interface";
+
+// interface SeedData {
+//   products: Product[];
+// }
+import bcryptjs from 'bcryptjs';
+
+interface SeedProduct {
+  description: string;
+  images: string[];
+  inStock: number;
+  price: number;
+  sizes: ValidSizes[];
+  slug: string;
+  tags: string[];
+  title: string;
+  type: ValidTypes;
+  gender: "men" | "women" | "kid" | "unisex";
+}
+interface SeedUser{
+  email: string;
+  password: string;
+  name: string;
+  role: "admin" | "user";
+}
+
+type ValidSizes = "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";
+type ValidTypes = "shirts" | "pants" | "hoodies" | "hats";
 
 interface SeedData {
-  products: Product[];
+  categories: string[];
+  products: SeedProduct[];
+  users: SeedUser[]
 }
 
 export const initialData: SeedData = {
+  categories: ["Shirts", "Pants", "Hoodies", "Hats"],
   products: [
     {
       description:
@@ -683,6 +713,20 @@ export const initialData: SeedData = {
       tags: ["shirt"],
       title: "Kids Corp Jacket",
       gender: "kid",
+    },
+  ],
+  users: [
+    {
+      role: "admin",
+      name: "Admin",
+      email: "M8v2o@example.com",
+      password: bcryptjs.hashSync("1234", 10),
+    },
+    {
+      role: "user",
+      name: "User",
+      email: "gM2sM@example.com",
+      password: bcryptjs.hashSync("1234", 10),
     },
   ],
 };

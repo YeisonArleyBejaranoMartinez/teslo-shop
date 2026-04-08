@@ -1,9 +1,9 @@
 import { QuantitySelector, Title } from "@/src/components";
 import Link from "next/link";
 // import { initialData } from "../seed/seed";
-import { initialData } from "../../../seed/seed";
+import { initialData } from "../../../../seed/seed";
 import Image from "next/image";
-import async from "../../category/[id]/page";
+import async from "../../gender/[gender]/page";
 import { redirect } from "next/dist/server/api-utils";
 import clsx from "clsx";
 import { IoCardOutline } from "react-icons/io5";

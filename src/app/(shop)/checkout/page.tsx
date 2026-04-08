@@ -1,6 +1,6 @@
 import { QuantitySelector, Title } from "@/src/components";
 import Link from "next/link";
-import { initialData } from "../../seed/seed";
+import { initialData } from "../../../seed/seed";
 import Image from "next/image";
 const productsInCart = [
   initialData.products[0],

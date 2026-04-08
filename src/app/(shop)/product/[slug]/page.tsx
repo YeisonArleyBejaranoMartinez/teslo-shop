@@ -1,18 +1,55 @@
-import { initialData } from "@/src/app/seed/seed";
-import { QuantitySelector, SizeSelector } from "@/src/components";
+export const revalidate = 604800;
 import { ProductSlideShow } from "@/src/components";
 import { titleFont } from "@/src/confic/fonts";
 import { notFound } from "next/navigation";
 import { ProductMovileSlideShow } from "../../../../components/product/slide-show/ProductMovileSlideShow";
+import { getProductBySlug } from "@/src/actions";
+import  {StockLabel } from "@/src/components/stock-label/StockLabel";
 
 interface Props {
   params: {
     slug: string;
   };
 }
+type PropsMetadata = {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+import type { Metadata, ResolvingMetadata } from "next";
+import {AddToCart} from "./ui/AddToCart"
+
+
+
+export async function generateMetadata(
+  { params }: PropsMetadata,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const { slug } = await params;
+  // fetch post information
+  const post = await fetch(`https://api.vercel.app/blog/${slug}`).then((res) =>
+    res.json(),
+  );
+
+  return {
+    title: post.title,
+    description: post.description,
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      //images : [], // https: // misitioweb.com/products/imagen_1.png
+      images: [
+        {
+          url: post.image,
+        }
+      ],
+    },
+  };
+}
+
 export default async function Produc({ params }: Props) {
   const { slug } = await params;
-  const product = initialData.products.find((product) => product.slug === slug);
+  const product =  await getProductBySlug(slug);
+  console.log(product);
   if (!product) {
     notFound();
   }
@@ -34,19 +71,12 @@ export default async function Produc({ params }: Props) {
       </div>
       {/*detalles del producto */}
       <div className="col-span-1 px-5 bg-blue-200 mb-10">
+        <StockLabel slug={product.slug} />
         <h1 className={`${titleFont.className} antialiased text-px font-bold`}>
           {product.title}
         </h1>
         <p className="text-log mb-5">${product.price}</p>
-        {/*selector de tallas */}
-        <SizeSelector
-          Selectedsizes={product.sizes[0]}
-          avaliableSizes={product.sizes}
-        />
-        {/*selector de cantidad */}
-        <QuantitySelector quantity={1} />
-        {/*Boton */}
-        <button className="btn-primary my-5">Agregar al carrito</button>
+        <AddToCart product={product}/>
         {/*descripcion */}
         <h3 className="font-bold text-sm">Descripción</h3>
         <p className="font-light">{product.description}</p>
