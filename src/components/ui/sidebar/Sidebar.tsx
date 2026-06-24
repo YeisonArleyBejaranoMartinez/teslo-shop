@@ -27,9 +27,9 @@ export const Sidebar = () => {
   const {data: session } = useSession(); // 👈 reactivo automáticamente
   const isAuthenticated = !!session?.user;
   const isAdmin = session?.user.role==="admin";
-  console.log(isAdmin);
+  // console.log(isAdmin);
 
-  console.log(isAuthenticated)
+  // console.log(isAuthenticated)
   // const isAuthenticated = status === 'authenticated';
 
   return (
@@ -81,7 +81,8 @@ export const Sidebar = () => {
             <span className="ml-3 text-xl">Perfil</span>
           </Link>
           <Link
-            href="./"
+            href="/orders"
+            onClick={() => isSideMenuClose()}
             className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
           >
             <IoTicketOutline size={30} />
@@ -110,7 +111,7 @@ export const Sidebar = () => {
         {
           !isAuthenticated &&
           <Link
-            href="../auth/login"
+            href="/auth/login"
             onClick={()=>{
               router.refresh();
               isSideMenuClose()}}
@@ -125,22 +126,25 @@ export const Sidebar = () => {
         isAdmin &&
           <>
             <Link
-              href="./"
+              href="/admin/products"
+              onClick={()=>{isSideMenuClose()}}
               className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
             >
               <IoAccessibilitySharp size={30} />
               <span className="ml-3 text-xl">Productos</span>
             </Link>
             <Link
-              href="./"
+              href="/admin/orders"
               className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+              onClick={()=>{isSideMenuClose()}}
             >
               <IoTicketOutline size={30} />
               <span className="ml-3 text-xl">Ordenes</span>
             </Link>
             <Link
-              href="./"
+              href="/admin/users"
               className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+              onClick={()=>{isSideMenuClose()}}
             >
               <IoPeopleOutline size={30} />
               <span className="ml-3 text-xl">Usuarios</span>

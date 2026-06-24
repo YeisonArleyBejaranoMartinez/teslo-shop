@@ -254,6 +254,7 @@ export type ProductWhereInput = {
   categoryId?: Prisma.StringFilter<"Product"> | string
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
   ProductImage?: Prisma.ProductImageListRelationFilter
+  OrderItem?: Prisma.OrderItemListRelationFilter
 }
 
 export type ProductOrderByWithRelationInput = {
@@ -269,6 +270,7 @@ export type ProductOrderByWithRelationInput = {
   categoryId?: Prisma.SortOrder
   category?: Prisma.CategoryOrderByWithRelationInput
   ProductImage?: Prisma.ProductImageOrderByRelationAggregateInput
+  OrderItem?: Prisma.OrderItemOrderByRelationAggregateInput
 }
 
 export type ProductWhereUniqueInput = Prisma.AtLeast<{
@@ -287,6 +289,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   categoryId?: Prisma.StringFilter<"Product"> | string
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
   ProductImage?: Prisma.ProductImageListRelationFilter
+  OrderItem?: Prisma.OrderItemListRelationFilter
 }, "id" | "slug">
 
 export type ProductOrderByWithAggregationInput = {
@@ -335,6 +338,7 @@ export type ProductCreateInput = {
   gender: $Enums.Gender
   category: Prisma.CategoryCreateNestedOneWithoutProductInput
   ProductImage?: Prisma.ProductImageCreateNestedManyWithoutProductInput
+  OrderItem?: Prisma.OrderItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateInput = {
@@ -349,6 +353,7 @@ export type ProductUncheckedCreateInput = {
   gender: $Enums.Gender
   categoryId: string
   ProductImage?: Prisma.ProductImageUncheckedCreateNestedManyWithoutProductInput
+  OrderItem?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductUpdateInput = {
@@ -363,6 +368,7 @@ export type ProductUpdateInput = {
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   category?: Prisma.CategoryUpdateOneRequiredWithoutProductNestedInput
   ProductImage?: Prisma.ProductImageUpdateManyWithoutProductNestedInput
+  OrderItem?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateInput = {
@@ -377,6 +383,7 @@ export type ProductUncheckedUpdateInput = {
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
   ProductImage?: Prisma.ProductImageUncheckedUpdateManyWithoutProductNestedInput
+  OrderItem?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateManyInput = {
@@ -587,6 +594,20 @@ export type ProductUpdateOneRequiredWithoutProductImageNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductUpdateToOneWithWhereWithoutProductImageInput, Prisma.ProductUpdateWithoutProductImageInput>, Prisma.ProductUncheckedUpdateWithoutProductImageInput>
 }
 
+export type ProductCreateNestedOneWithoutOrderItemInput = {
+  create?: Prisma.XOR<Prisma.ProductCreateWithoutOrderItemInput, Prisma.ProductUncheckedCreateWithoutOrderItemInput>
+  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutOrderItemInput
+  connect?: Prisma.ProductWhereUniqueInput
+}
+
+export type ProductUpdateOneRequiredWithoutOrderItemNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductCreateWithoutOrderItemInput, Prisma.ProductUncheckedCreateWithoutOrderItemInput>
+  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutOrderItemInput
+  upsert?: Prisma.ProductUpsertWithoutOrderItemInput
+  connect?: Prisma.ProductWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductUpdateToOneWithWhereWithoutOrderItemInput, Prisma.ProductUpdateWithoutOrderItemInput>, Prisma.ProductUncheckedUpdateWithoutOrderItemInput>
+}
+
 export type ProductCreateWithoutCategoryInput = {
   id?: string
   title: string
@@ -598,6 +619,7 @@ export type ProductCreateWithoutCategoryInput = {
   tags?: Prisma.ProductCreatetagsInput | string[]
   gender: $Enums.Gender
   ProductImage?: Prisma.ProductImageCreateNestedManyWithoutProductInput
+  OrderItem?: Prisma.OrderItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutCategoryInput = {
@@ -611,6 +633,7 @@ export type ProductUncheckedCreateWithoutCategoryInput = {
   tags?: Prisma.ProductCreatetagsInput | string[]
   gender: $Enums.Gender
   ProductImage?: Prisma.ProductImageUncheckedCreateNestedManyWithoutProductInput
+  OrderItem?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutCategoryInput = {
@@ -666,6 +689,7 @@ export type ProductCreateWithoutProductImageInput = {
   tags?: Prisma.ProductCreatetagsInput | string[]
   gender: $Enums.Gender
   category: Prisma.CategoryCreateNestedOneWithoutProductInput
+  OrderItem?: Prisma.OrderItemCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutProductImageInput = {
@@ -679,6 +703,7 @@ export type ProductUncheckedCreateWithoutProductImageInput = {
   tags?: Prisma.ProductCreatetagsInput | string[]
   gender: $Enums.Gender
   categoryId: string
+  OrderItem?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutProductImageInput = {
@@ -708,6 +733,7 @@ export type ProductUpdateWithoutProductImageInput = {
   tags?: Prisma.ProductUpdatetagsInput | string[]
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   category?: Prisma.CategoryUpdateOneRequiredWithoutProductNestedInput
+  OrderItem?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutProductImageInput = {
@@ -721,6 +747,79 @@ export type ProductUncheckedUpdateWithoutProductImageInput = {
   tags?: Prisma.ProductUpdatetagsInput | string[]
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  OrderItem?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
+}
+
+export type ProductCreateWithoutOrderItemInput = {
+  id?: string
+  title: string
+  description: string
+  inStock: number
+  price?: number
+  sizes?: Prisma.ProductCreatesizesInput | $Enums.Size[]
+  slug: string
+  tags?: Prisma.ProductCreatetagsInput | string[]
+  gender: $Enums.Gender
+  category: Prisma.CategoryCreateNestedOneWithoutProductInput
+  ProductImage?: Prisma.ProductImageCreateNestedManyWithoutProductInput
+}
+
+export type ProductUncheckedCreateWithoutOrderItemInput = {
+  id?: string
+  title: string
+  description: string
+  inStock: number
+  price?: number
+  sizes?: Prisma.ProductCreatesizesInput | $Enums.Size[]
+  slug: string
+  tags?: Prisma.ProductCreatetagsInput | string[]
+  gender: $Enums.Gender
+  categoryId: string
+  ProductImage?: Prisma.ProductImageUncheckedCreateNestedManyWithoutProductInput
+}
+
+export type ProductCreateOrConnectWithoutOrderItemInput = {
+  where: Prisma.ProductWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductCreateWithoutOrderItemInput, Prisma.ProductUncheckedCreateWithoutOrderItemInput>
+}
+
+export type ProductUpsertWithoutOrderItemInput = {
+  update: Prisma.XOR<Prisma.ProductUpdateWithoutOrderItemInput, Prisma.ProductUncheckedUpdateWithoutOrderItemInput>
+  create: Prisma.XOR<Prisma.ProductCreateWithoutOrderItemInput, Prisma.ProductUncheckedCreateWithoutOrderItemInput>
+  where?: Prisma.ProductWhereInput
+}
+
+export type ProductUpdateToOneWithWhereWithoutOrderItemInput = {
+  where?: Prisma.ProductWhereInput
+  data: Prisma.XOR<Prisma.ProductUpdateWithoutOrderItemInput, Prisma.ProductUncheckedUpdateWithoutOrderItemInput>
+}
+
+export type ProductUpdateWithoutOrderItemInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  inStock?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  sizes?: Prisma.ProductUpdatesizesInput | $Enums.Size[]
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  tags?: Prisma.ProductUpdatetagsInput | string[]
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  category?: Prisma.CategoryUpdateOneRequiredWithoutProductNestedInput
+  ProductImage?: Prisma.ProductImageUpdateManyWithoutProductNestedInput
+}
+
+export type ProductUncheckedUpdateWithoutOrderItemInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  inStock?: Prisma.IntFieldUpdateOperationsInput | number
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  sizes?: Prisma.ProductUpdatesizesInput | $Enums.Size[]
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  tags?: Prisma.ProductUpdatetagsInput | string[]
+  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  ProductImage?: Prisma.ProductImageUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateManyCategoryInput = {
@@ -746,6 +845,7 @@ export type ProductUpdateWithoutCategoryInput = {
   tags?: Prisma.ProductUpdatetagsInput | string[]
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   ProductImage?: Prisma.ProductImageUpdateManyWithoutProductNestedInput
+  OrderItem?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutCategoryInput = {
@@ -759,6 +859,7 @@ export type ProductUncheckedUpdateWithoutCategoryInput = {
   tags?: Prisma.ProductUpdatetagsInput | string[]
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   ProductImage?: Prisma.ProductImageUncheckedUpdateManyWithoutProductNestedInput
+  OrderItem?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateManyWithoutCategoryInput = {
@@ -780,10 +881,12 @@ export type ProductUncheckedUpdateManyWithoutCategoryInput = {
 
 export type ProductCountOutputType = {
   ProductImage: number
+  OrderItem: number
 }
 
 export type ProductCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   ProductImage?: boolean | ProductCountOutputTypeCountProductImageArgs
+  OrderItem?: boolean | ProductCountOutputTypeCountOrderItemArgs
 }
 
 /**
@@ -803,6 +906,13 @@ export type ProductCountOutputTypeCountProductImageArgs<ExtArgs extends runtime.
   where?: Prisma.ProductImageWhereInput
 }
 
+/**
+ * ProductCountOutputType without action
+ */
+export type ProductCountOutputTypeCountOrderItemArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderItemWhereInput
+}
+
 
 export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -817,6 +927,7 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   categoryId?: boolean
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
   ProductImage?: boolean | Prisma.Product$ProductImageArgs<ExtArgs>
+  OrderItem?: boolean | Prisma.Product$OrderItemArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
 
@@ -865,6 +976,7 @@ export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
   ProductImage?: boolean | Prisma.Product$ProductImageArgs<ExtArgs>
+  OrderItem?: boolean | Prisma.Product$OrderItemArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -879,6 +991,7 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     category: Prisma.$CategoryPayload<ExtArgs>
     ProductImage: Prisma.$ProductImagePayload<ExtArgs>[]
+    OrderItem: Prisma.$OrderItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1287,6 +1400,7 @@ export interface Prisma__ProductClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   category<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   ProductImage<T extends Prisma.Product$ProductImageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$ProductImageArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  OrderItem<T extends Prisma.Product$OrderItemArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$OrderItemArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1743,6 +1857,30 @@ export type Product$ProductImageArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.ProductImageScalarFieldEnum | Prisma.ProductImageScalarFieldEnum[]
+}
+
+/**
+ * Product.OrderItem
+ */
+export type Product$OrderItemArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrderItem
+   */
+  select?: Prisma.OrderItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the OrderItem
+   */
+  omit?: Prisma.OrderItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderItemInclude<ExtArgs> | null
+  where?: Prisma.OrderItemWhereInput
+  orderBy?: Prisma.OrderItemOrderByWithRelationInput | Prisma.OrderItemOrderByWithRelationInput[]
+  cursor?: Prisma.OrderItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderItemScalarFieldEnum | Prisma.OrderItemScalarFieldEnum[]
 }
 
 /**

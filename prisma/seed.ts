@@ -23,6 +23,10 @@ const CategoryData: Prisma.CategoryCreateInput[] = [
 
 export async function main() {
   // Eliminar en orden correcto (respetando FKs)
+  await prisma.orderAddress.deleteMany();
+  await prisma.orderItem.deleteMany();
+  await prisma.order.deleteMany();
+
   await prisma.productImage.deleteMany();
   await prisma.product.deleteMany();
   await prisma.category.deleteMany();
@@ -87,7 +91,7 @@ export async function main() {
   }
 
   // console.log("products:", initialData.products);
-  console.log("Productos creados");
+  // console.log("Productos creados");
   // Insertar usuarios
   await prisma.user.deleteMany();
   for (const users of initialData.users) {
@@ -105,7 +109,7 @@ export async function main() {
       },
     });
   }
-  console.log("Usuarios creados");
+  // console.log("Usuarios creados");
 
   //insertar countries
   for (const country of countries) {

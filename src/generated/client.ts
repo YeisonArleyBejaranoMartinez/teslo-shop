@@ -64,3 +64,23 @@ export type User = Prisma.UserModel
  * 
  */
 export type Country = Prisma.CountryModel
+/**
+ * Model UserAddress
+ * 
+ */
+export type UserAddress = Prisma.UserAddressModel
+/**
+ * Model Order
+ * 
+ */
+export type Order = Prisma.OrderModel
+/**
+ * Model OrderItem
+ * 
+ */
+export type OrderItem = Prisma.OrderItemModel
+/**
+ * Model OrderAddress
+ * 
+ */
+export type OrderAddress = Prisma.OrderAddressModel

@@ -15,12 +15,12 @@ export default async function Home({ searchParams }: Props) {
   const {
     products = [],
     totalPages,
-    currentPage,
+    // currentPage,
   } = await getPaginatedProductsWithImages({
     page: pageInt,
     take: take ? parseInt(take) : 12,
   });
-  console.log({ totalPages, currentPage });
+  // console.log({ totalPages, currentPage });
   if (products.length === 0) {
     redirect("./");
   }

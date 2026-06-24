@@ -20,6 +20,12 @@ export interface  CartProduct {
   size: Size;
   image: string;
 }
+export interface ProductImage{
+  id: number;
+  url: string;
+  productId: string;
+  product?: Product;
+}
 export type Size = "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";
 export type Type = "shirts" | "pants" | "hoodies" | "hats";
 export type TypeGender = "men" | "women" | "kid" | "unisex" | "other";

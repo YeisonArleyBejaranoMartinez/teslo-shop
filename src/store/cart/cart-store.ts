@@ -19,7 +19,7 @@ interface State {
     total: number;
     itemsInCart: number;
   }
-
+  clearCart: ()=>void;
 }
 export const useCartStore = create<State>()(
   persist(
@@ -82,6 +82,11 @@ export const useCartStore = create<State>()(
         );
         set({
           cart: updatedCartProducts,
+        });
+      },
+      clearCart: () => {
+        set({
+          cart: [],
         });
       },
       getSumaryInformation: () => {

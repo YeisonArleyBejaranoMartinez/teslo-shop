@@ -1,39 +1,72 @@
 "use client";
 
-import type { Country } from "../../../../interfaces/index";
+ import { useAddressStore } from "@/src/store";
+import type { Country, Address } from "../../../../interfaces/index";
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
-
-
-
+import { useEffect } from "react";
+// import { setUserAddress } from "@/src/actions";
+import { setUserAddress } from "../../../../actions/address/set-user-address";
+import { deleteUserAddress } from "../../../../actions/address/delete-user-address";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface Props {
  countries:Country[]
+ userStoredAddress?: Partial<Address>
 }
 
 type FormInputs = {
   firstName: string;
   lastName: string;
   address: string;
-  address2?: string;
+  address2?: string ;
   postalCode: string;
   city: string;
   country: string;
   phone: string;
   rememberAddress: boolean;
 };
-export const AddressForm = ({countries}:  Props) => {
-  const { handleSubmit, register, formState:{isValid} } = useForm<FormInputs>({
+export const AddressForm = ({countries, userStoredAddress={}}:  Props) => {
+const router = useRouter();
+  const { handleSubmit, register, formState:{isValid}, reset } = useForm<FormInputs>({
     mode: "onChange",
     defaultValues: {
+      ...(userStoredAddress ),
+      rememberAddress:false,
       //TODO: leer de la  base de datos.
 
     },
   });
-  const onSubmit = (data: FormInputs) => {
-    console.log({ data });
+  const {data: session}= useSession(
+    {required: true,}
+  );
+  const setAddress = useAddressStore((state) => state.setAddress);
+  const address = useAddressStore((state) => state.address);
 
+  useEffect(()=>{
+    if(address.firstName){
+    reset(address)
+  }
+  }, [address, reset])
+
+  const onSubmit  = async(data: FormInputs) => {
+    const {rememberAddress, ...restAddress} = data;
+    setAddress(restAddress);
+
+    if(rememberAddress){
+      //TODO:server Action
+      await setUserAddress(restAddress, session!.user.id)
+
+    }else{
+     await  deleteUserAddress(session!.user.id)
+      //TODO: eliminar dirección del usuario
+
+    }
+    router.push("/checkout");
   };
+
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
       <div className="grid grid-cols-1 gap-2 sm:gap-5 sm:grid-cols-2">
@@ -119,10 +152,11 @@ export const AddressForm = ({countries}:  Props) => {
           htmlFor="checkbox"
         >
           <input
+
             type="checkbox"
             className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-500 checked:bg-blue-500 checked:before:bg-blue-500 hover:before:opacity-10"
             id="checkbox"
-            {...register("rememberAddress")}
+            {...register("rememberAddress", {onChange: (e) => console.log("checked:", e.target.checked)})}
             // checked
           />
           <div className="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">

@@ -14,7 +14,7 @@ export default async function ShopLayout({
   //   redirect("/")
   // }
 
-  console.log({session});
+  // console.log({session});
   return (
     <div className="flex justify-center ">
       <div className="w-full sm:w-87.5 px-10">{children}</div>
