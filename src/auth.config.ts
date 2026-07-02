@@ -7,8 +7,11 @@ import bcryptjs from 'bcryptjs';
 
 interface TokenData {
   id: string;
+  name: string;
   email: string;
   emailVerified: Date | null;
+  role: string;
+  image?: string;
 }
 
 export const authConfig: NextAuthConfig = {
@@ -28,8 +31,6 @@ export const authConfig: NextAuthConfig = {
     //  console.log(session, token, user);
      session.user = token.data as TokenData;
     return session;
-
-
   }
   },
   providers: [

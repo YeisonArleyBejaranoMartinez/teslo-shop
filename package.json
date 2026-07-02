@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run prisma:deploy && next build",
     "start": "next start",
     "lint": "eslint",
-    "seed": "node --loader ts-node/esm prisma/seed.ts"
+    "prisma:deploy": "npx prisma migrate deploy && npx prisma generate",
+    "seed": "npx tsx prisma/seed.ts"
   },
   "dependencies": {
     "@paypal/react-paypal-js": "^9.2.0",
